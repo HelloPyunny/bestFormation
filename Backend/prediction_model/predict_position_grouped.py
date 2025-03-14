@@ -38,6 +38,12 @@ pipeline.fit(X_train, y_train)
 
 print(f"Sample size of [Position_Grouped] training: {len(X_train)}")
 
+from sklearn.metrics import accuracy_score
+
+y_pred = pipeline.predict(X_test)  # predict test data
+accuracy = accuracy_score(y_test, y_pred)  # calculate accuracy
+print(f"model accuracy: {accuracy:.4f}") 
+
 def predict_position_grouped(new_player_stats: dict):
     name = list(new_player_stats.keys())[0]
     stats = new_player_stats[name]

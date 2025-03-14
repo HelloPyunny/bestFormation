@@ -38,6 +38,17 @@ for pos in positions:
     model.fit(X_train, y_train)
     position_models[pos] = model
     print(f"Position {pos} model trained. (Sample size: {len(X_train)})")
+    
+    from sklearn.metrics import r2_score, mean_absolute_error
+    
+    # R² score, MAE - accuracy evaluation
+    y_pred = model.predict(X_test)
+    r2 = r2_score(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    
+    print(f"Position {pos} model trained. (Sample size: {len(X_train)})")
+    print(f"  - R² Score: {r2:.4f}")
+    print(f"  - MAE: {mae:.2f}")
 
 def predict_ovr_by_position(new_stats: dict, target_position: str):
     """
