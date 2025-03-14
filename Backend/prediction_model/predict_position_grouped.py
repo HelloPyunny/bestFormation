@@ -38,6 +38,7 @@ pipeline.fit(X_train, y_train)
 
 print(f"Sample size of [Position_Grouped] training: {len(X_train)}")
 
+# import statements
 from sklearn.metrics import accuracy_score
 
 y_pred = pipeline.predict(X_test)  # predict test data
@@ -56,7 +57,7 @@ def predict_position_grouped(new_player_stats: dict):
     
     return name, prediction
 
-'''
+#'''
 # 예시 사용
 if __name__ == '__main__':
     sample_input = {
@@ -76,4 +77,4 @@ if __name__ == '__main__':
     }
     name, result = predict_position_grouped(sample_input)
     print(f"선수 이름: {name}, 예측된 Position_Grouped: {result}")
-'''
+#'''

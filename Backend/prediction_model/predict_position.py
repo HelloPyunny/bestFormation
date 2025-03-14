@@ -35,6 +35,7 @@ pipeline = Pipeline([
 pipeline.fit(X_train, y_train)
 print(f"Sample size of [Position] training: {len(X_train)}")
 
+# import statements
 from sklearn.metrics import accuracy_score
 
 y_pred = pipeline.predict(X_test)  # predict test data
@@ -53,7 +54,7 @@ def predict_position(new_player_stats: dict):
     
     return name, prediction
 
-'''
+# '''
 if __name__ == '__main__':
     sample_input = {
     "Kylian Mbappé": 
@@ -73,7 +74,8 @@ if __name__ == '__main__':
     }
     name, result = predict_position(sample_input)
     print(f"선수 이름: {name}, 예측된 Position: {result}")
-    
+
+'''    
     '박준혁':    
         {
         'PAC': 60.0, 'SHO': 30.0, 'PAS': 52.0, 'DRI': 55.0, 'DEF': 62.0, 'PHY': 70.0, 
@@ -89,4 +91,4 @@ if __name__ == '__main__':
         'GK Positioning': 0.0, 'GK Reflexes': 0.0
         }
 
-'''
+# '''

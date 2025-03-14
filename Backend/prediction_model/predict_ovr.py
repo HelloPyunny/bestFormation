@@ -39,6 +39,7 @@ for pos in positions:
     position_models[pos] = model
     print(f"Position {pos} model trained. (Sample size: {len(X_train)})")
     
+    # import statements
     from sklearn.metrics import r2_score, mean_absolute_error
     
     # R² score, MAE - accuracy evaluation
