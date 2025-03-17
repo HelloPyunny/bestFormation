@@ -1,14 +1,19 @@
 # predict_ovr.py
 
+import sqlite3
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-# from sklearn.pipeline import Pipeline
-# from sklearn.preprocessing import StandardScaler, OneHotEncoder
-# from sklearn.compose import ColumnTransformer
 
-# load data
-df = pd.read_csv('../../data/player_data/data_updated.csv')
+# load data using CSV
+#df = pd.read_csv('../../Data/player_data/data_updated.csv')
+
+# load data from SQLite
+db_file = '../../Data/players.db'
+conn = sqlite3.connect(db_file)
+# load all the data from players table to DataFrame
+df = pd.read_sql_query("SELECT * FROM players", conn)
+conn.close()
 
 # set features
 selected_features = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY', 'Acceleration',

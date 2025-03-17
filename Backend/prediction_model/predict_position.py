@@ -1,13 +1,21 @@
 import numpy as np
 import pandas as pd
+import sqlite3
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-# load data
-df = pd.read_csv('../../data/player_data/data_updated.csv')
+# load data using CSV
+# df = pd.read_csv('../../Data/player_data/data_updated.csv')
+
+# load data from SQLite
+db_file = '../../Data/players.db'
+conn = sqlite3.connect(db_file)
+# load all the data from players table to DataFrame
+df = pd.read_sql_query("SELECT * FROM players", conn)
+conn.close()
 
 # set features
 selected_features = ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY', 'Acceleration',
