@@ -3,5 +3,6 @@ numpy
 scikit-learn
 matplotlib
 seaborn
+sqlite3
 
 # pip3 install -r requirements.txt
