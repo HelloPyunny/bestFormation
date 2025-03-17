@@ -1,2 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# virtual env
 venv/
-prediction_model/__pycache__
+
+# database
+*.db
+
+# Excel data files
+Data/**/*.xlsx
+
+# Environment variables
+.env
+
+# Log and temporary files
+*.log
+*.tmp
+
+# IDE and OS-related files
+.vscode/
+.DS_Store
+
+# Miscellaneous unnecessary files
+*.bak
+*.swp
