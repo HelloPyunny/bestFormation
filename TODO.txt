@@ -1,0 +1,11 @@
+< TODO List >
+
+===== DONE =====
+prediction model 만들기
+sql 연결하기
+    ㄴ 연결 후에 predict ~ .py db 경로 sqlite3로 수정하기
+
+===== TODO =====
+프론트엔드 작업
+main.py 에 선수 추가 하는 기능 만들기
+포메이션 알고리즘 구상 + 구현하기
