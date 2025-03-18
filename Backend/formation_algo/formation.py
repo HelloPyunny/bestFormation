@@ -1,62 +1,140 @@
 # formation.py
 
-class FormationStrategy:
-    def apply_tactics(self):
-        raise NotImplementedError("이 메서드는 서브클래스에서 구현해야 합니다.")
+from node_pool import ALL_NODES
 
-class Balanced442(FormationStrategy):
-    def apply_tactics(self):
-        return "공격과 수비의 균형 유지, 중앙 미드필더의 볼 배급 중요"
+# set line as list by formations
+# [ ] is line, and in each line node(position) goes in
 
-class Attacking433(FormationStrategy):
-    def apply_tactics(self):
-        return "측면 공격 강화, 윙어와 풀백의 오버래핑 필수"
-
-class Modern4231(FormationStrategy):
-    def apply_tactics(self):
-        return "AMC 중심 전술, 중앙에서 창의적인 패스 플레이 필요"
-
-class Defensive532(FormationStrategy):
-    def apply_tactics(self):
-        return "두터운 수비라인, 빠른 역습 활용"
-
-class ExtremeDefensive541(FormationStrategy):
-    def apply_tactics(self):
-        return "수비 집중, 상대 공격 차단 후 롱볼 역습"
-
-class Aggressive4141(FormationStrategy):
-    def apply_tactics(self):
-        return "공격형 미드필더 전진 배치, 수비형 미드필더가 중심 역할"
-
-class Brazilian4222(FormationStrategy):
-    def apply_tactics(self):
-        return "창의적인 미드필더 활용, 공격적인 패스 플레이"
-
-class CentralAttack4312(FormationStrategy):
-    def apply_tactics(self):
-        return "중앙 공격 집중, AMC를 통한 기회 창출"
-
-
-formation_tactics = {
-    "4-4-2": Balanced442(),
-    "4-3-3": Attacking433(),
-    "4-2-3-1": Modern4231(),
-    "3-5-2": Balanced442(),
-    "3-4-3": Attacking433(),
-    "5-3-2": Defensive532(),
-    "5-4-1": ExtremeDefensive541(),
-    "4-1-4-1": Aggressive4141(),
-    "4-2-2-2": Brazilian4222(),
-    "4-3-1-2": CentralAttack4312()
+FORMATIONS = {
+    "442": {
+        "lines": [
+            ["GK"],
+            ["LB", "LCB", "RCB", "RB"],
+            ["LM", "LCM", "RCM", "RM"],
+            ["LST", "RST"]
+        ]
+    },
+    "433 (정석)": {
+        "lines": [
+            ["GK"],
+            ["LB", "LCB", "RCB", "RB"],
+            ["LCM", "CM", "RCM"],
+            ["LW", "RW"],
+            ["ST"]
+        ]
+    },
+    "433 (원볼란치)": {
+        "lines": [
+            ["GK"],
+            ["LB", "LCB", "RCB", "RB"],
+            ["CDM"],
+            ["LCM", "RCM"],
+            ["LW", "RW"],
+            ["ST"]
+        ]
+    },
+    "4231": {
+        "lines": [
+            ["GK"],
+            ["LB", "LCB", "RCB", "RB"],
+            ["LDM", "RDM"],
+            ["CAM"],
+            ["LW", "RW"],
+            ["ST"]
+        ]
+    },
+    "352": {
+        "lines": [
+            ["GK"],
+            ["LCB", "CB", "RCB"],
+            ["CDM"],
+            ["LWB-A", "LCM", "RCM", "RWB-A"],
+            ["LST", "RST"]
+        ]
+    },
+    "343": {
+        "lines": [
+            ["GK"],
+            ["LCB", "CB", "RCB", "LWB-A", "LCM", "RCM", "RWB-A"],
+            ["LW", "RW"],
+            ["ST"]
+        ]
+    },
+    "532": {
+        "lines": [
+            ["GK"],
+            ["LWB-D", "LCB", "CB", "RCB", "RWB-D"],
+            ["LCM", "CM", "RCM"],
+            ["LST", "RST"]
+        ]
+    },
+    "541": {
+        "lines": [
+            ["GK"],
+            ["LWB-D", "LCB", "CB", "RCB", "RWB-D"],
+            ["LM", "LCM", "RCM", "RM"],
+            ["ST"]
+        ]
+    },
+    "4141": {
+        "lines": [
+            ["GK"],
+            ["LB", "LCB", "RCB", "RB"],
+            ["CDM"],
+            ["LM", "LCM", "RCM", "RM"],
+            ["ST"]
+        ]
+    },
+    "4222": {
+        "lines": [
+            ["GK"],
+            ["LWB-D", "LCB", "RCB", "RWB-D"],
+            ["LDM", "RDM"],
+            ["LCM", "RCM"],
+            ["LST", "RST"]
+        ]
+    },
+    "4312": {
+        "lines": [
+            ["GK"],
+            ["LB", "LCB", "RCB", "RB"],
+            ["CDM"],
+            ["LCM", "RCM"],
+            ["CAM"],
+            ["LST", "RST"]
+        ]
+    }
 }
 
-def get_tactics(formation):
-    strategy = formation_tactics.get(formation)
-    if strategy:
-        return strategy.apply_tactics()
-    else:
-        return "해당 포메이션에 대한 전술 정보가 없습니다."
+def get_flat_node_list(formation_name):
+    """
+    return 1D list by the given formation_name
+    ex) "442" -> ['GK', 'LB', 'LCB', 'RCB', 'RB', 'LM', 'LCM', 'RCM', 'RM', 'LST', 'RST']
+    """
+    formation = FORMATIONS.get(formation_name)
+    if formation is None:
+        raise ValueError(f"Formation '{formation_name} is not defined.")
+    flat_list = []
+    for line in formation["lines"]:
+        flat_list.extend(line)
+    return flat_list
+
+def get_line_info(formation_name):
+    """
+    return node(position) list by the given formation_name
+    """
+    formation = FORMATIONS.get(formation_name)
+    if formation is None:
+        raise ValueError(f"Formation '{formation_name} is not defined.")
+    return formation["lines"]
 
 if __name__ == "__main__":
-    user_formation = input("포메이션을 입력하세요 (예: 4-4-2): ")
-    print(get_tactics(user_formation))
+    for name in FORMATIONS:
+        print(f"formation: {name}")
+        print("  flat node list:", get_flat_node_list(name))
+        print("  line composition:")
+        for idx, line in enumerate(get_line_info(name), start=1):
+            # can also print the descriptions by each line with formation
+            line_info0 = [f"{pos} ({ALL_NODES[pos]['desc']})" for pos in line]
+            print(f"    line {idx}: {line_info0}")
+        print("-" * 50)
