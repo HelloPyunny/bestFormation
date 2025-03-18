@@ -8,10 +8,10 @@ __pycache__/
 venv/
 
 # database
-#*.db
+*.db
 
 # Excel data files
-#Data/**/*.xlsx
+Data/**/*.xlsx
 
 # Environment variables
 .env
@@ -21,8 +21,8 @@ venv/
 *.tmp
 
 # IDE and OS-related files
-#.vscode/
-#.DS_Store
+.vscode/
+.DS_Store
 
 # Miscellaneous unnecessary files
 *.bak
