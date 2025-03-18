@@ -1,11 +1,13 @@
-# Player Prediction Model
+# Best Formation Generator with Player Position Prediction
 
-This project predicts a player's **Position Group** (e.g., ATT, MF, DF, GK), detailed **Position** (e.g., ST, CB), and **Overall Rating (OVR)** based on the player's stats. The workflow is divided into multiple scripts, each serving a distinct purpose.
+This project generates the best formation for the selected 11 players.
+
+Also this project predicts a player's **Position Group** (e.g., FW, MF, DF, GK), detailed **Position** (e.g., ST, CB), and **Overall Rating (OVR)** based on the player's stats. The workflow is divided into multiple scripts, each serving a distinct purpose.
 
 ## Scripts Overview
 
 - **predict_position_grouped.py**  
-  Trains a classification model (e.g., RandomForestClassifier) to classify a player into a Position Group (ATT, MF, DF, GK).
+  Trains a classification model (e.g., RandomForestClassifier) to classify a player into a Position Group (FW, MF, DF, GK).
 
 - **predict_position.py**  
   Trains a classification model to predict a player’s detailed Position (ST, CB, etc.).
