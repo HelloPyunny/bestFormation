@@ -23,3 +23,6 @@ Also this project predicts a player's **Position Group** (e.g., FW, MF, DF, GK),
   - Compute the OVR for the predicted (or user-overridden) Position.
 
   The script also continuously prompts the user to view OVR predictions for alternative positions until the user chooses to exit.
+
+Start server with FasAPI: uvicorn main:app --reload
+Start client: npm start
