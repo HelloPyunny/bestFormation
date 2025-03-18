@@ -4,5 +4,8 @@ scikit-learn
 matplotlib
 seaborn
 sqlite3
+fastapi 
+uvicorn
+jinja2
 
 # pip3 install -r requirements.txt
